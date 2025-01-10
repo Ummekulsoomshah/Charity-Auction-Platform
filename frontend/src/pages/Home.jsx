@@ -1,8 +1,30 @@
-import React from 'react'
+import React, { useEffect,useState } from 'react'
 import img1 from '../assets/puppy-4234435_1280.jpg'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios'
 const Home = () => {
+    const [auctions, setAuctions] = useState([])
+
+    useEffect(()=>{
+        const fetchAuctions = async () => {
+            try {
+                const res = await axios.get('http://localhost:3000/user/itemList',
+                    {
+                        headers:{
+                            "authorization": `Bearer ${localStorage.getItem('token')}`
+                        }
+                    }
+                )
+                const items=res.data.items
+                setAuctions(items)
+                console.log(auctions)
+
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchAuctions()
+    })
     return (
         <>
             <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800 mt-4 w-full">
@@ -45,21 +67,16 @@ const Home = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-1 ">
                     {/* Auction Cards */}
-                        <div  className="bg-white w-3/4 border border-black rounded-lg shadow p-10">
-                            <h4 className="text-lg font-bold mb-2">Auction Item #</h4>
-                            <p className="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Place your bids now!</p>
-                            <button className="text-white py-2 px-4 rounded text-white bg-black">View Details</button>
-                        </div>
-                        <div  className="bg-white w-3/4 border border-black rounded-lg shadow p-10">
-                            <h4 className="text-lg font-bold mb-2">Auction Item #</h4>
-                            <p className="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Place your bids now!</p>                            <button className="text-white py-2 px-4 rounded text-white bg-black">View Details</button>
+                    {auctions.map((auction) => (
 
-                        </div>
-                        <div  className="bg-white w-3/4 border border-black rounded-lg shadow p-10">
-                            <h4 className="text-lg font-bold mb-2">Auction Item #</h4>
-                            <p className="text-gray-600 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Place your bids now!</p>
+                        <div  key={auction._id} className="bg-white w-3/4 border border-black rounded-lg shadow p-10">
+                            <h4 className="text-lg font-bold mb-2">{auction.name}</h4>
+                            <p className="text-gray-600 mb-4">{auction.description}</p>
+                            <p>Bid : {auction.bid}</p>
+                            <p>Bidder : {auction.bidder}</p>
                             <button className="text-white py-2 px-4 rounded text-white bg-black">View Details</button>
                             </div>
+                    ))}
                 </div>
             </div>
         </>

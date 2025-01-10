@@ -5,6 +5,7 @@ const cookieParser=require('cookie-parser')
 const cors=require('cors');
 const userModel = require('./models/user.model');
 const jwt=require('jsonwebtoken')
+const io=require('./server')
 const corsOptions = {
     origin: 'http://localhost:5173', // Replace with your frontend origin
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
