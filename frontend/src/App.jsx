@@ -6,6 +6,7 @@ import Login from './pages/login';
 import AuctionsList from './pages/AuctionsList';
 import Dashboard from './pages/Dashboard';
 import ItemAdditionForm from './pages/ItemAdditionForm';
+import BidForm from './pages/BidForm';
 const App = () => {
   return (
     <BrowserRouter>
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/AuctionsList' element={<AuctionsList/>}/>
         <Route path='/ItemAdditionForm' element={<ItemAdditionForm/>}/>
         <Route path='/Dashboard' element={<Dashboard/>}/>
+        <Route path='/bidForm/:id' element={<BidForm/>}/>
       </Routes>
     </BrowserRouter>
   )
