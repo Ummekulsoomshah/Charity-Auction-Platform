@@ -28,7 +28,7 @@ const Login = () => {
           navigate('/Dashboard')
         }else if(response.data.user.role==='bider'){
           console.log('bider')
-          navigate('/AuctionsList')
+          navigate('/')
         }
       }
     } catch (err) {

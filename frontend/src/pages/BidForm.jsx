@@ -2,17 +2,20 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
-
+import { useNavigate } from 'react-router-dom';
 const socket = io('http://localhost:3000');
 const BidForm = () => {
     const { id } = useParams()
     const [bid, setBid] = useState(0)
     const [bidder, setBider] = useState('')
-
+    const navigate = useNavigate()
     const submitHandler = (e) => {
         e.preventDefault();
         const bidData = { id, bid, bidder };
         socket.emit('placeBid', bidData);
+        navigate('/')
+        setBid(0)
+        setBider('')
     };
     return (
         <div className='flex justify-center content-center'>

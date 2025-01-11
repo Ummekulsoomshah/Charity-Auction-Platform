@@ -20,9 +20,18 @@ const io = new Server(server, {
     })
     socket.on('placeBid', async (bidData) => {
       const { id, bid, bidder } = bidData;
+      console.log('bidData',bidData)
       try {
         const auction = await itemModel.findOne({_id:id});
-        if (auction && bid > auction.bid) {
+        console.log('auction',auction)
+        console.log('bid',bid)
+
+        console.log('auctionbid',auction.bid)
+        console.log(bid > auction.bid)
+        console.log(Number(bid) > Number(auction.bid))
+        if (auction && Number(bid) > Number(auction.bid)) {
+          console.log("bid",bid)
+          console.log('auction.bid',auction.bid)
           auction.bid = bid;
           auction.bidder = bidder;
           await auction.save();

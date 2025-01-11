@@ -2,11 +2,12 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Register from './pages/Register'
-import Login from './pages/login';
 import AuctionsList from './pages/AuctionsList';
 import Dashboard from './pages/Dashboard';
 import ItemAdditionForm from './pages/ItemAdditionForm';
 import BidForm from './pages/BidForm';
+import Login from './pages/Login';
+import ProtectedRoute from './pages/ProtectedRoute'
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,7 +18,12 @@ const App = () => {
         <Route path='/AuctionsList' element={<AuctionsList/>}/>
         <Route path='/ItemAdditionForm' element={<ItemAdditionForm/>}/>
         <Route path='/Dashboard' element={<Dashboard/>}/>
-        <Route path='/bidForm/:id' element={<BidForm/>}/>
+        <Route path='/bidForm/:id' element={
+          <ProtectedRoute>
+
+            <BidForm/>
+          </ProtectedRoute>
+          }/>
       </Routes>
     </BrowserRouter>
   )
