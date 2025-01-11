@@ -27,3 +27,19 @@ module.exports.itemList = async (req, res, next) => {
         next(err)
     }
 }
+module.exports.getTodayBids=async(req,res,next)=>{
+    try {
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const bids = await itemModel.find({
+            timestamp: { $gte: startOfDay }
+        });
+
+        res.status(200).json({
+            bids
+        });
+    } catch (err) {
+        next(err);
+    }
+}

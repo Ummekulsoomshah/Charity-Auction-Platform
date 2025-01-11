@@ -35,6 +35,7 @@ const io = new Server(server, {
           auction.bid = bid;
           auction.bidder = bidder;
           await auction.save();
+          console.log('auction',auction)
           io.emit('updateBid', auction);
         }
       } catch (error) {

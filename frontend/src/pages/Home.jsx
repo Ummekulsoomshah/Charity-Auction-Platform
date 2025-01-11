@@ -102,7 +102,7 @@ const Home = () => {
                         <div key={auction._id} className="bg-white w-3/4 border border-black rounded-lg shadow p-10">
                             <h4 className="text-lg font-bold mb-2">{auction.name}</h4>
                             <p className="text-gray-600 mb-4">{auction.description}</p>
-                            <p>Bid : {auction.bid}</p>
+                            <p>Highest Bid : {auction.bid}</p>
                             <p>Bidder : {auction.bidder}</p>
                             <button
                                 className="mt-3 text-white bg-black flex items-center justify-center rounded px-10 py-2 border border-black w-full text-lg"

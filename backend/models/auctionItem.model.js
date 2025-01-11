@@ -25,6 +25,10 @@ const itemSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    timestamp: {
+        type: Date,
+        default: Date.now
+    }
 
 })
 
