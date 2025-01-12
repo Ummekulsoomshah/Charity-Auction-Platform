@@ -11,6 +11,7 @@ router.get('/dashboard',verifyToken,authRoles('admin'),userController.dashboard)
 router.post('/createItem',verifyToken,authRoles('admin'),itemController.createItem)
 router.get('/itemList',itemController.itemList)
 router.get('/getTodayBids',verifyToken,authRoles('admin'),itemController.getTodayBids)
+router.get('/getTotalBids',verifyToken,authRoles('admin'),itemController.getTotalBids)
 // router.get('/bidForm/:id',verifyToken,authRoles('bider'),itemController.bidForm)
 
 module.exports=router

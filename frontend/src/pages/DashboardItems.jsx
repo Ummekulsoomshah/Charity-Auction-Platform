@@ -78,6 +78,7 @@ const DashboardItems = () => {
         }
         fetchData();
         socket.on('updateBid', (newBid) => {
+            console.log("newBid",newBid)
             setChartData(prevChartData => {
                 const newLabels = [...prevChartData.labels, new Date(newBid.timestamp).toLocaleTimeString()];
                 const newData = [...prevChartData.datasets[0].data, newBid.bid];
@@ -99,7 +100,7 @@ const DashboardItems = () => {
     }, [])
     return (
         <div className="App w-full flex flex-row items-center justify-center">
- <div className="w-full h-[60vh]"> {/* Adjust the height as needed */}
+            <div className="w-full h-[50vh]"> {/* Adjust the height as needed */}
                 <Graph chartData={chartData} />
             </div>
         </div>
