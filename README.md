@@ -72,16 +72,6 @@ https://github.com/user-attachments/assets/a05d91bd-92c9-450e-9967-df26e63f4692
 
 Contributions are welcome! Please fork the repository and create a pull request for any proposed changes or features.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For any inquiries or feedback, reach out to:
-- Name: [Your Name]
-- Email: your.email@example.com
-- GitHub: [Your GitHub Profile Link]
 ```
 
 Feel free to customize this further by adding your specific project details, screenshots, or deployment instructions.
