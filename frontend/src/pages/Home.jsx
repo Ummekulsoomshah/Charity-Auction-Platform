@@ -24,14 +24,14 @@ const Home = () => {
     }
     const logout = () => {
         localStorage.removeItem('token')
-        console.log("logout")
+        //console.log("logout")
     }
     useEffect(() => {
         const fetchAuctions = async () => {
             const queryParams = new URLSearchParams(location.search);
             const page = queryParams.get('page') || 1;
             const limit = queryParams.get('limit') || 10;
-            console.log(limit)
+            //console.log(limit)
 
             try {
                 const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/itemList`,
@@ -49,10 +49,10 @@ const Home = () => {
                 setAuctions(items)
                 socket.emit('currentBid', auctions)
 
-                // console.log(auctions)
+                // //console.log(auctions)
 
             } catch (error) {
-                console.log(error)
+                //console.log(error)
             }
         }
         fetchAuctions()

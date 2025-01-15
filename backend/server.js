@@ -8,20 +8,17 @@ const { Server } = require('socket.io')
 const cors = require("cors");
 
 const server = http.createServer(app)
-console.log(process.env)
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+//console.log(process.env)
+mongoose.connect(process.env.MONGO_URI);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Replace with your React app's URL
+    origin: "https://charity-auction-platform.vercel.app/", // Replace with your React app's URL
     methods: ["GET", "POST"],
   },
 });
 
 io.on('connection', (socket) => {
-  console.log('New connection')
+  //console.log('New connection')
 
   socket.on('placeBid', async (bidData) => {
     const { id, bid, bidder } = bidData;
@@ -47,5 +44,5 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  //console.log(`Server is running on port ${PORT}`);
 });

@@ -9,7 +9,7 @@ const cookieParser=require('cookie-parser')
 const jwt=require('jsonwebtoken')
 
 const corsOptions = {
-    origin: 'http://localhost:5173', // Replace with your frontend origin
+    origin: 'https://charity-auction-platform.vercel.app', // Replace with your frontend origin
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
 
@@ -29,7 +29,7 @@ const seedAdmin=async ()=>{
 
     // })
     }else{
-        console.log('admin alr exist')
+        //console.log('admin alr exist')
     }
 }
 seedAdmin()

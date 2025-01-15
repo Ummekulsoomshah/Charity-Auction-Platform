@@ -33,9 +33,9 @@ module.exports.itemList = async (req, res, next) => {
 module.exports.getTodayBids=async(req,res,next)=>{
     try {
         const startOfDay = new Date();
-        console.log("startOfDay",startOfDay)
+        //console.log("startOfDay",startOfDay)
         startOfDay.setHours(0, 0, 0, 0);
-        console.log("startOfDay.setHours(0, 0, 0, 0)",startOfDay.setHours(0, 0, 0, 0))
+        //console.log("startOfDay.setHours(0, 0, 0, 0)",startOfDay.setHours(0, 0, 0, 0))
 
         const bids = await itemModel.find({
             timestamp: { $gte: startOfDay }

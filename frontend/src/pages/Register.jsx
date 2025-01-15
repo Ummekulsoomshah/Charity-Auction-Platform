@@ -19,15 +19,15 @@ const Register = () => {
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/register`, userData
       )
       if (response.status === 200) {
-        console.log('user created')
-        console.log(response.data)
+        //console.log('user created')
+        //console.log(response.data)
         const token=response.data.token
-        console.log(token)
+        //console.log(token)
         localStorage.setItem('token',token)
 navigate('/')
       }
     } catch (err) {
-      console.log(err)
+      //console.log(err)
     }
     setName('')
     setEmail('')

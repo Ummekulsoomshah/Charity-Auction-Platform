@@ -54,7 +54,7 @@ const DashboardItems = () => {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     }
                 });
-                console.log(response.data)
+                //console.log(response.data)
                 const bids = response.data.bids;
 
                 const labels = bids.map(bidItem => new Date(bidItem.timestamp).toLocaleTimeString());
@@ -73,12 +73,12 @@ const DashboardItems = () => {
                 });
 
             } catch (err) {
-                console.log(err, 'error in fetching data')
+                //console.log(err, 'error in fetching data')
             }
         }
         fetchData();
         socket.on('updateBid', (newBid) => {
-            console.log("newBid",newBid)
+            //console.log("newBid",newBid)
             setChartData(prevChartData => {
                 const newLabels = [...prevChartData.labels, new Date(newBid.timestamp).toLocaleTimeString()];
                 const newData = [...prevChartData.datasets[0].data, newBid.bid];

@@ -23,12 +23,12 @@ const submitHandler=async(e)=>{
         })
 
         if(response.status===201){
-            console.log('Item added successfully')
+            //console.log('Item added successfully')
         }else{
-            console.log('Item not added')
+            //console.log('Item not added')
         }
     }catch(ERR){
-        console.log(ERR)
+        //console.log(ERR)
     }
     setItem('')
     setDescription('')

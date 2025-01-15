@@ -14,7 +14,7 @@ const Dashboard = () => {
 
 localStorage.setItem('amount', amount)
     socket.emit('updateRequiredAmount', amount);
-    console.log(amount)
+    //console.log(amount)
 
     amount=0
   }

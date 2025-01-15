@@ -16,21 +16,21 @@ const Login = () => {
 
       const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, userData)
       if (response.status === 200) {
-        console.log('user found')
-        console.log(response.data)
+        //console.log('user found')
+        //console.log(response.data)
         const token = response.data.token
-        console.log(token)
+        //console.log(token)
         localStorage.setItem('token', token)
         if(response.data.user.role==='admin'){
-          console.log('admin')
+          //console.log('admin')
           navigate('/Dashboard')
         }else if(response.data.user.role==='bider'){
-          console.log('bider')
+          //console.log('bider')
           navigate('/')
         }
       }
     } catch (err) {
-      console.log(err)
+      //console.log(err)
     }
     setEmail('')
     setPassword('')
