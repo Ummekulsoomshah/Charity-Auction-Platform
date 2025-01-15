@@ -19,7 +19,10 @@ module.exports.createItem = async (req, res, next) => {
 
 module.exports.itemList = async (req, res, next) => {
     try {
-        const items = await itemModel.find()
+        const {startIndex,lastindex}=req.pagination
+        var items = await itemModel.find()
+        var slicedItems=items.slice(startIndex,lastindex)
+        items=slicedItems
         res.status(200).json({
             items
         })

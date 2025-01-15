@@ -1,15 +1,18 @@
 const express=require('express');
-const app=express()
-const userRoute=require('./routes/user.route')
-const cookieParser=require('cookie-parser')
 const cors=require('cors');
+
+const userRoute=require('./routes/user.route')
 const userModel = require('./models/user.model');
+
+const app=express()
+const cookieParser=require('cookie-parser')
 const jwt=require('jsonwebtoken')
-const io=require('./server')
+
 const corsOptions = {
     origin: 'http://localhost:5173', // Replace with your frontend origin
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
+
 //seeding data of admin
 const seedAdmin=async ()=>{
     const admin=await userModel.findOne({email:"admin@gmail.com"})
@@ -36,5 +39,6 @@ app.use(cors(corsOptions))
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
 app.use('/user',userRoute)
 module.exports=app

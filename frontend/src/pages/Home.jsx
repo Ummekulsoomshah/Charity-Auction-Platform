@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import img1 from '../assets/puppy-4234435_1280.jpg'
 import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
@@ -8,7 +9,16 @@ import { io } from 'socket.io-client'
 const socket = io('http://localhost:3000')
 const Home = () => {
     const [auctions, setAuctions] = useState([])
+    const [page, setPage] = useState(1)
+    const [limit, setLimit] = useState(10)
     const navigate = useNavigate()
+    const location = useLocation()
+
+    const submitHandler = (e) => {
+        e.preventDefault()
+        navigate(`/?page=${page}&limit=${limit}`)
+    }
+
     const bidform = (auctId) => {
         navigate(`/bidForm/${auctId}`)
     }
@@ -18,11 +28,20 @@ const Home = () => {
     }
     useEffect(() => {
         const fetchAuctions = async () => {
+            const queryParams = new URLSearchParams(location.search);
+            const page = queryParams.get('page') || 1;
+            const limit = queryParams.get('limit') || 10;
+            console.log(limit)
+
             try {
                 const res = await axios.get('http://localhost:3000/user/itemList',
                     {
                         headers: {
                             "authorization": `Bearer ${localStorage.getItem('token')}`
+                        },
+                        params: {
+                            page,
+                            limit
                         }
                     }
                 )
@@ -48,8 +67,8 @@ const Home = () => {
         return () => {
             socket.off('updateBid');
         };
-    })
- 
+    }, [location.search])
+
 
     return (
         <>
@@ -57,28 +76,40 @@ const Home = () => {
                 <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                         <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+
                             <li>
-                            </li>
-                            <li>
-                                  <button
+                                <button
                                     className="mt-3 text-white bg-black flex items-center justify-center rounded px-10 py-2 border border-black w-full text-lg"
 
-                                   onClick={()=>logout()} >LOGOUT</button>
+                                    onClick={() => logout()} >LOGOUT</button>
 
-                        
+
                             </li>
-                            <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Marketplace</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Team</a>
-                            </li>
-                            <li>
-                                <a href="#" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                            </li>
+                            <form onSubmit={(e) => { submitHandler(e) }}>
+                                <div class="mb-4 flex">
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+                                       Page NO
+                                    </label>
+                                    <input
+                                    value={page}
+                                    onChange={(e) => setPage(e.target.value)}
+                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" type="Number" placeholder="xx" />
+                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="amount">
+                                       No of bid items
+                                    </label>
+                                    <input
+                                    value={limit}
+                                    onChange={(e) => setLimit(e.target.value)}
+                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="amount" type="Number" placeholder="xx" />
+                               
+                                <button
+                        type="submit"
+                        className="ml-4 p-2 bg-black text-white rounded"
+                    >
+                        Apply
+                    </button>
+                                </div>
+                            </form>
 
                         </ul>
                     </div>
