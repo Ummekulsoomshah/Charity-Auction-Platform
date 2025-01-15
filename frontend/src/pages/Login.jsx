@@ -1,12 +1,10 @@
 import React, { useContext, useState } from 'react'
-import { UserDataContext } from '../context/UserContext'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  // const { user, setuser } = useContext(UserDataContext)
   const navigate = useNavigate()
   const submitHandler = async (e) => {
     e.preventDefault()
@@ -16,7 +14,7 @@ const Login = () => {
     }
     try {
 
-      const response = await axios.post('http://localhost:3000/user/login', userData)
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, userData)
       if (response.status === 200) {
         console.log('user found')
         console.log(response.data)

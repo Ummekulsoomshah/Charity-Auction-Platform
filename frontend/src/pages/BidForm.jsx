@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
-const socket = io('http://localhost:3000');
+const socket = io(process.env.REACT_APP_BACKEND_URL, { transports: ['websocket'] });
+
 const BidForm = () => {
     const { id } = useParams()
     const [bid, setBid] = useState(0)

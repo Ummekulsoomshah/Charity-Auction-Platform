@@ -5,7 +5,8 @@ import { Line } from "react-chartjs-2";
 import DashboardItems from './DashboardItems'
 import BarChart from './BarChart';
 import { io } from 'socket.io-client';
-const socket = io('http://localhost:3000');
+const socket = io(process.env.REACT_APP_BACKEND_URL, { transports: ['websocket'] });
+
 const Dashboard = () => {
   const submitHandler = async (e) => {
     e.preventDefault()

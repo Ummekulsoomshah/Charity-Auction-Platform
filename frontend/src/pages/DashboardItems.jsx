@@ -5,8 +5,8 @@ import { Line } from "react-chartjs-2";
 import { useState } from "react";
 import axios from 'axios'
 import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_BACKEND_URL, { transports: ['websocket'] });
 
-const socket = io('http://localhost:3000');
 Chart.register(CategoryScale);
 
 const Graph = ({ chartData }) => {
@@ -48,7 +48,7 @@ const DashboardItems = () => {
             try {
 
 
-                const response = await axios.get("http://localhost:3000/user/getTodayBids", {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/getTodayBids`, {
 
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`

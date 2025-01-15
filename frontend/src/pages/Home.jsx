@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { io } from 'socket.io-client'
 
-const socket = io('http://localhost:3000')
+const socket = io(process.env.REACT_APP_BACKEND_URL, { transports: ['websocket'] });
 const Home = () => {
     const [auctions, setAuctions] = useState([])
     const [page, setPage] = useState(1)
@@ -34,7 +34,7 @@ const Home = () => {
             console.log(limit)
 
             try {
-                const res = await axios.get('http://localhost:3000/user/itemList',
+                const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/itemList`,
                     {
                         headers: {
                             "authorization": `Bearer ${localStorage.getItem('token')}`

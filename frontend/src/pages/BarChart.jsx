@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Bar } from 'react-chartjs-2';
 import axios from 'axios';
 import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_BACKEND_URL, { transports: ['websocket'] });
 
-const socket = io('http://localhost:3000');
 
 const Graph = ({ chartData }) => {
     return (
@@ -44,7 +44,7 @@ const BarChart = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/user/getTotalBids', {
+                const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/user/getTotalBids`, {
                     headers: {
                         "Authorization": `Bearer ${localStorage.getItem("token")}`
                     }

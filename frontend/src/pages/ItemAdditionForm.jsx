@@ -16,7 +16,7 @@ const submitHandler=async(e)=>{
         bidder
     }
     try{
-        const response=await axios.post('http://localhost:3000/user/createItem',itemData,{
+        const response=await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/createItem`,itemData,{
             headers:{
                 'authorization':`Bearer ${localStorage.getItem('token')}`
             }

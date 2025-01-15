@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Register from './pages/Register'
-import AuctionsList from './pages/AuctionsList';
 import Dashboard from './pages/Dashboard';
 import ItemAdditionForm from './pages/ItemAdditionForm';
 import BidForm from './pages/BidForm';
@@ -15,7 +14,6 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path='/Register' element={<Register/>}/>
         <Route path='/Login' element={<Login/>}/>
-        <Route path='/AuctionsList' element={<AuctionsList/>}/>
         <Route path='/ItemAdditionForm' element={<ItemAdditionForm/>}/>
         <Route path='/Dashboard' element={<Dashboard/>}/>
         <Route path='/bidForm/:id' element={

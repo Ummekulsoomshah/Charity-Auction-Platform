@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react'
-import { UserDataContext } from '../context/UserContext'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +7,6 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate=useNavigate()
-  // const { user, setuser } = useContext(UserDataContext)
   const submitHandler = async (e) => {
     e.preventDefault()
     const userData = {
@@ -18,7 +16,7 @@ const Register = () => {
     }
     try {
 
-      const response = await axios.post('http://localhost:3000/user/register', userData
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/register`, userData
       )
       if (response.status === 200) {
         console.log('user created')
